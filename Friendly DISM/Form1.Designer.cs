@@ -32,8 +32,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.loadingProgressBar = new System.Windows.Forms.ProgressBar();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.clearDismOutput = new System.Windows.Forms.Button();
             this.mountWimTab = new System.Windows.Forms.TabControl();
             this.mountWimPage = new System.Windows.Forms.TabPage();
+            this.driverMountPathSeachButton = new System.Windows.Forms.Button();
+            this.driverMountPathTextBox = new System.Windows.Forms.TextBox();
+            this.addDriverMountedButton = new System.Windows.Forms.Button();
             this.saveMountedRadioBurron = new System.Windows.Forms.RadioButton();
             this.discardMountedRadioBurron = new System.Windows.Forms.RadioButton();
             this.dismountWIMMountedButton = new System.Windows.Forms.Button();
@@ -55,10 +59,7 @@
             this.dismountWIMButton = new System.Windows.Forms.Button();
             this.getMountedImagesButton = new System.Windows.Forms.Button();
             this.getWimButtom = new System.Windows.Forms.Button();
-            this.addDriverMountedButton = new System.Windows.Forms.Button();
-            this.driverMountPathSeachButton = new System.Windows.Forms.Button();
-            this.driverMountPathTextBox = new System.Windows.Forms.TextBox();
-            this.clearDismOutput = new System.Windows.Forms.Button();
+            this.getDriverMountedbutton = new System.Windows.Forms.Button();
             this.loadingPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.mountWimTab.SuspendLayout();
@@ -111,6 +112,16 @@
             this.mainPanel.Size = new System.Drawing.Size(638, 633);
             this.mainPanel.TabIndex = 15;
             // 
+            // clearDismOutput
+            // 
+            this.clearDismOutput.Location = new System.Drawing.Point(151, 368);
+            this.clearDismOutput.Name = "clearDismOutput";
+            this.clearDismOutput.Size = new System.Drawing.Size(144, 43);
+            this.clearDismOutput.TabIndex = 19;
+            this.clearDismOutput.Text = "Clear Output";
+            this.clearDismOutput.UseVisualStyleBackColor = true;
+            this.clearDismOutput.Click += new System.EventHandler(this.clearDismOutput_Click);
+            // 
             // mountWimTab
             // 
             this.mountWimTab.Controls.Add(this.mountWimPage);
@@ -123,6 +134,7 @@
             // 
             // mountWimPage
             // 
+            this.mountWimPage.Controls.Add(this.getDriverMountedbutton);
             this.mountWimPage.Controls.Add(this.driverMountPathSeachButton);
             this.mountWimPage.Controls.Add(this.driverMountPathTextBox);
             this.mountWimPage.Controls.Add(this.addDriverMountedButton);
@@ -145,6 +157,37 @@
             this.mountWimPage.TabIndex = 0;
             this.mountWimPage.Text = "Mount-WIM";
             this.mountWimPage.UseVisualStyleBackColor = true;
+            // 
+            // driverMountPathSeachButton
+            // 
+            this.driverMountPathSeachButton.Enabled = false;
+            this.driverMountPathSeachButton.Location = new System.Drawing.Point(570, 6);
+            this.driverMountPathSeachButton.Name = "driverMountPathSeachButton";
+            this.driverMountPathSeachButton.Size = new System.Drawing.Size(29, 18);
+            this.driverMountPathSeachButton.TabIndex = 19;
+            this.driverMountPathSeachButton.Text = "***";
+            this.driverMountPathSeachButton.UseVisualStyleBackColor = true;
+            this.driverMountPathSeachButton.Click += new System.EventHandler(this.driverMountPathSeachButton_Click);
+            // 
+            // driverMountPathTextBox
+            // 
+            this.driverMountPathTextBox.Enabled = false;
+            this.driverMountPathTextBox.Location = new System.Drawing.Point(464, 6);
+            this.driverMountPathTextBox.Name = "driverMountPathTextBox";
+            this.driverMountPathTextBox.Size = new System.Drawing.Size(100, 20);
+            this.driverMountPathTextBox.TabIndex = 18;
+            this.driverMountPathTextBox.Text = "PathToDriver";
+            // 
+            // addDriverMountedButton
+            // 
+            this.addDriverMountedButton.Enabled = false;
+            this.addDriverMountedButton.Location = new System.Drawing.Point(352, 6);
+            this.addDriverMountedButton.Name = "addDriverMountedButton";
+            this.addDriverMountedButton.Size = new System.Drawing.Size(106, 43);
+            this.addDriverMountedButton.TabIndex = 17;
+            this.addDriverMountedButton.Text = "Add-Driver";
+            this.addDriverMountedButton.UseVisualStyleBackColor = true;
+            this.addDriverMountedButton.Click += new System.EventHandler(this.addDriverMountedButton_Click);
             // 
             // saveMountedRadioBurron
             // 
@@ -349,46 +392,16 @@
             this.getWimButtom.UseVisualStyleBackColor = true;
             this.getWimButtom.Click += new System.EventHandler(this.getWimButtom_Click);
             // 
-            // addDriverMountedButton
+            // getDriverMountedbutton
             // 
-            this.addDriverMountedButton.Enabled = false;
-            this.addDriverMountedButton.Location = new System.Drawing.Point(352, 6);
-            this.addDriverMountedButton.Name = "addDriverMountedButton";
-            this.addDriverMountedButton.Size = new System.Drawing.Size(106, 43);
-            this.addDriverMountedButton.TabIndex = 17;
-            this.addDriverMountedButton.Text = "Add-Driver";
-            this.addDriverMountedButton.UseVisualStyleBackColor = true;
-            this.addDriverMountedButton.Click += new System.EventHandler(this.addDriverMountedButton_Click);
-            // 
-            // driverMountPathSeachButton
-            // 
-            this.driverMountPathSeachButton.Enabled = false;
-            this.driverMountPathSeachButton.Location = new System.Drawing.Point(570, 6);
-            this.driverMountPathSeachButton.Name = "driverMountPathSeachButton";
-            this.driverMountPathSeachButton.Size = new System.Drawing.Size(29, 18);
-            this.driverMountPathSeachButton.TabIndex = 19;
-            this.driverMountPathSeachButton.Text = "***";
-            this.driverMountPathSeachButton.UseVisualStyleBackColor = true;
-            this.driverMountPathSeachButton.Click += new System.EventHandler(this.driverMountPathSeachButton_Click);
-            // 
-            // driverMountPathTextBox
-            // 
-            this.driverMountPathTextBox.Enabled = false;
-            this.driverMountPathTextBox.Location = new System.Drawing.Point(464, 6);
-            this.driverMountPathTextBox.Name = "driverMountPathTextBox";
-            this.driverMountPathTextBox.Size = new System.Drawing.Size(100, 20);
-            this.driverMountPathTextBox.TabIndex = 18;
-            this.driverMountPathTextBox.Text = "PathToDriver";
-            // 
-            // clearDismOutput
-            // 
-            this.clearDismOutput.Location = new System.Drawing.Point(151, 368);
-            this.clearDismOutput.Name = "clearDismOutput";
-            this.clearDismOutput.Size = new System.Drawing.Size(144, 43);
-            this.clearDismOutput.TabIndex = 19;
-            this.clearDismOutput.Text = "Clear Output";
-            this.clearDismOutput.UseVisualStyleBackColor = true;
-            this.clearDismOutput.Click += new System.EventHandler(this.clearDismOutput_Click);
+            this.getDriverMountedbutton.Enabled = false;
+            this.getDriverMountedbutton.Location = new System.Drawing.Point(352, 63);
+            this.getDriverMountedbutton.Name = "getDriverMountedbutton";
+            this.getDriverMountedbutton.Size = new System.Drawing.Size(106, 43);
+            this.getDriverMountedbutton.TabIndex = 20;
+            this.getDriverMountedbutton.Text = "Get-Driver";
+            this.getDriverMountedbutton.UseVisualStyleBackColor = true;
+            this.getDriverMountedbutton.Click += new System.EventHandler(this.getDriverMountedbutton_Click);
             // 
             // Form1
             // 
@@ -444,6 +457,7 @@
         private System.Windows.Forms.Button driverMountPathSeachButton;
         private System.Windows.Forms.TextBox driverMountPathTextBox;
         private System.Windows.Forms.Button clearDismOutput;
+        private System.Windows.Forms.Button getDriverMountedbutton;
     }
 }
 

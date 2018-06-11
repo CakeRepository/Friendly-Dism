@@ -53,6 +53,7 @@ namespace Friendly_DISM
         /// <param name="state"></param>
         private void uiControlMounted(bool state)
         {
+            getDriverMountedbutton.Enabled = state;
             driverMountPathSeachButton.Enabled = state;
             driverMountPathTextBox.Enabled = state;
             exportPathTextBox.ReadOnly = state;
@@ -399,6 +400,10 @@ namespace Friendly_DISM
                             }
                             DismApi.UnmountImage(mountPath, save, dismProgress_action);
                         }
+                        catch(DismException ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
                         finally
                         {
                             if (this.InvokeRequired)
@@ -644,6 +649,69 @@ namespace Friendly_DISM
             });
         }
 
-       
+        private void getDriverMountedbutton_Click(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Task.Run(() =>
+                {
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            loadingPanel.Visible = true;
+                            mainPanel.Enabled = false;
+                            mainPanel.Visible = false;
+                        }));
+                    }
+                    else
+                    {
+                        loadingPanel.Visible = true;
+                        mainPanel.Enabled = false;
+                        mainPanel.Visible = false;
+                    }
+                });
+                try
+                {
+                    using (DismSession session = DismApi.OpenOfflineSession(MountPath))
+                    {
+                        var drivers  = DismApi.GetDrivers(session,true);
+                        foreach(var driver in drivers)
+                        {
+                            Console.WriteLine(driver);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            loadingPanel.Visible = false;
+                            mainPanel.Enabled = true;
+                            mainPanel.Visible = true;
+                        }));
+
+                    }
+                    else
+                    {
+                        loadingPanel.Visible = false;
+                        mainPanel.Enabled = true;
+                        mainPanel.Visible = true;
+                    }
+                    DismApi.Shutdown();
+                }
+
+
+
+            });
+        }
     }
 }
