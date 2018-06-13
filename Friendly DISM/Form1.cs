@@ -506,26 +506,6 @@ namespace Friendly_DISM
                     }
                     ));
                 }
-                else
-                {
-                    dismOutputListbox.Items.Clear();
-                    // Initialize the DismApi
-                    DismApi.Initialize(DismLogLevel.LogErrors);
-                    dismOutputListbox.Items.Add("Mount Paths");
-                    try
-                    {
-                        var api = DismApi.GetMountedImages();
-                        foreach (var mountedImages in api)
-                        {
-                            dismOutputListbox.Items.Add(mountedImages.MountPath);
-                        }
-                    }
-                    finally
-                    {
-                        // Shut down the DismApi
-                        DismApi.Shutdown();
-                    }
-                }
             });
         }
 
@@ -539,7 +519,6 @@ namespace Friendly_DISM
                 if (dialog.ShowDialog() == DialogResult.OK)  //check for OK...they might press cancel, so don't do anything if they did.
                 {
                     mountPath = dialog.SelectedPath;
-                    DismApi.Initialize(DismLogLevel.LogErrors);
                     Task t = Task.Factory.StartNew(() =>
                     {
                         try
