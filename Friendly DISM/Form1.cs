@@ -553,7 +553,7 @@ namespace Friendly_DISM
                                     mainPanel.Enabled = false;
                                     mainPanel.Visible = false;
                                     uiControlMounted(false);
-                                    if (saveMountedRadioBurron.Checked)
+                                    if (saveRadioButton.Checked)
                                     {
                                         save = true;
                                     }
