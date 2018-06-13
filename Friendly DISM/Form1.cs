@@ -83,41 +83,53 @@ namespace Friendly_DISM
                 if (dialog.ShowDialog() == DialogResult.OK)  //check for OK...they might press cancel, so don't do anything if they did.
                 {
                     wimFileTextBox.Text = dialog.InitialDirectory + dialog.FileName;
-                }
-                Task.Factory.StartNew(() =>
-                {
-                    try
+                    Task.Factory.StartNew(() =>
                     {
-                        var api = DismApi.GetImageInfo(dialog.InitialDirectory + dialog.FileName);
-
-                        Task.Run(() =>
+                        try
                         {
-                            if (this.InvokeRequired)
+                            var api = DismApi.GetImageInfo(dialog.InitialDirectory + dialog.FileName);
+
+                            Task.Run(() =>
                             {
-                                this.Invoke((MethodInvoker)(() =>
+                                if (this.InvokeRequired)
                                 {
-                                    dismOutputListbox.Items.Add("Image Info");
-                                    foreach (var imageInfo in api)
-                                    { dismOutputListbox.Items.Add("Index: " + imageInfo.ImageIndex + " Image Description: " + imageInfo.ImageDescription); }
+                                    this.Invoke((MethodInvoker)(() =>
+                                    {
+                                        dismOutputListbox.Items.Add("Image Info");
+                                        foreach (var imageInfo in api)
+                                        { dismOutputListbox.Items.Add("Index: " + imageInfo.ImageIndex + " Image Description: " + imageInfo.ImageDescription); }
 
-                                }));
-                            }
-                        });
+                                    }));
+                                }
+                            });
 
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex);
-                    }
-                    finally
-                    {
-                        // Shut down the DismApi
-                        DismApi.Shutdown();
-                    }
-                });
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex);
+                        }
+                        finally
+                        {
+                            // Shut down the DismApi
+                            DismApi.Shutdown();
+                        }
+                    });
+                }
+                else
+                {
+                    DismApi.Shutdown();
+                }
             }
         }
-
+        /// <summary>
+        /// Checks if Dir is empty
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool IsDirectoryEmpty(string path)
+        {
+            return !Directory.EnumerateFileSystemEntries(path).Any();
+        }
         /// <summary>
         /// Dism Mount Path
         /// </summary>
@@ -130,7 +142,15 @@ namespace Friendly_DISM
                 //setup here
                 if (dialog.ShowDialog() == DialogResult.OK)  //check for OK...they might press cancel, so don't do anything if they did.
                 {
-                    exportPathTextBox.Text = dialog.SelectedPath + @"\Mount";
+                    if (IsDirectoryEmpty(dialog.SelectedPath))
+                    {
+                        exportPathTextBox.Text = dialog.SelectedPath;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Directory Not Empty. DISM Doesn't agree");
+                    }
+
                 }
             }
         }
@@ -589,6 +609,7 @@ namespace Friendly_DISM
 
         private void addDriverMountedButton_Click(object sender, EventArgs e)
         {
+            DismApi.Initialize(DismLogLevel.LogErrors);
             string driverPath = driverMountPathTextBox.Text;
             Task.Factory.StartNew(() =>
             {
@@ -651,6 +672,7 @@ namespace Friendly_DISM
 
         private void getDriverMountedbutton_Click(object sender, EventArgs e)
         {
+            DismApi.Initialize(DismLogLevel.LogErrors);
             Task.Factory.StartNew(() =>
             {
                 Task.Run(() =>
@@ -675,11 +697,23 @@ namespace Friendly_DISM
                 {
                     using (DismSession session = DismApi.OpenOfflineSession(MountPath))
                     {
-                        var drivers  = DismApi.GetDrivers(session,true);
-                        foreach(var driver in drivers)
+                        var drivers = DismApi.GetDrivers(session, true);
+                        
+                        if (this.InvokeRequired)
                         {
-                            Console.WriteLine(driver);
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                dismOutputListbox.Items.Add("Driver Information");
+                                foreach (var driver in drivers)
+                                {
+                                    dismOutputListbox.Items.Add("Driver: " + driver.ProviderName + " Version: " + driver.Version);
+
+                                }
+
+                            }));
                         }
+                        
+                        
                     }
 
                 }
@@ -713,5 +747,6 @@ namespace Friendly_DISM
 
             });
         }
+
     }
 }
