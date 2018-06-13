@@ -33,6 +33,149 @@ namespace Friendly_DISM
         #endregion
 
         #region Mount-WIM 
+        private void addDriverMountedButton_Click(object sender, EventArgs e)
+        {
+            if (driverMountPathTextBox.Text == "PathToDriver" || driverMountPathTextBox.Text == "" || driverMountPathTextBox.Text == null)
+            {
+                MessageBox.Show("Please Enter PathToDriver");
+            }
+            else
+            {
+                DismApi.Initialize(DismLogLevel.LogErrors);
+                string driverPath = driverMountPathTextBox.Text;
+                Task.Factory.StartNew(() =>
+                {
+                    Task.Run(() =>
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                loadingPanel.Visible = true;
+                                mainPanel.Enabled = false;
+                                mainPanel.Visible = false;
+                            }));
+                        }
+                        else
+                        {
+                            loadingPanel.Visible = true;
+                            mainPanel.Enabled = false;
+                            mainPanel.Visible = false;
+                        }
+                    });
+                    try
+                    {
+                        using (DismSession session = DismApi.OpenOfflineSession(MountPath))
+                        {
+                            DismApi.AddDriver(session, driverPath, true);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                loadingPanel.Visible = false;
+                                mainPanel.Enabled = true;
+                                mainPanel.Visible = true;
+                            }));
+
+                        }
+                        else
+                        {
+                            loadingPanel.Visible = false;
+                            mainPanel.Enabled = true;
+                            mainPanel.Visible = true;
+                        }
+                        DismApi.Shutdown();
+                    }
+                });
+            }
+        }
+
+        private void getDriverMountedbutton_Click(object sender, EventArgs e)
+        {
+            DismApi.Initialize(DismLogLevel.LogErrors);
+            Task.Factory.StartNew(() =>
+            {
+                Task.Run(() =>
+                {
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            loadingPanel.Visible = true;
+                            mainPanel.Enabled = false;
+                            mainPanel.Visible = false;
+                        }));
+                    }
+                    else
+                    {
+                        loadingPanel.Visible = true;
+                        mainPanel.Enabled = false;
+                        mainPanel.Visible = false;
+                    }
+                });
+                try
+                {
+                    using (DismSession session = DismApi.OpenOfflineSession(MountPath))
+                    {
+                        var drivers = DismApi.GetDrivers(session, true);
+
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                dismOutputListbox.Items.Add("Driver Information");
+                                foreach (var driver in drivers)
+                                {
+                                    dismOutputListbox.Items.Add("Driver: " + driver.ProviderName + " Version: " + driver.Version);
+                                }
+
+                            }));
+                        }
+
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            loadingPanel.Visible = false;
+                            mainPanel.Enabled = true;
+                            mainPanel.Visible = true;
+                        }));
+
+                    }
+                    else
+                    {
+                        loadingPanel.Visible = false;
+                        mainPanel.Enabled = true;
+                        mainPanel.Visible = true;
+                    }
+                    DismApi.Shutdown();
+                }
+
+
+
+            });
+        }
 
         private void driverMountPathSeachButton_Click(object sender, EventArgs e)
         {
@@ -162,7 +305,7 @@ namespace Friendly_DISM
         /// <param name="e"></param>
         private void mountWimButtom_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(wimFileTextBox.Text) || !String.IsNullOrEmpty(exportPathTextBox.Text))
+            if (!String.IsNullOrEmpty(wimFileTextBox.Text) || !String.IsNullOrEmpty(exportPathTextBox.Text) || !String.IsNullOrEmpty(indexTextBox.Text))
             {
                 DismApi.Initialize(DismLogLevel.LogErrors);
                 Task t = Task.Factory.StartNew(() =>
@@ -215,7 +358,7 @@ namespace Friendly_DISM
             }
             else
             {
-                MessageBox.Show("Please ");
+                MessageBox.Show("Please Select the WIM Folder and Mount Folder paths. DISM Approves");
             }
             
         }
@@ -598,150 +741,7 @@ namespace Friendly_DISM
 
         }
 
-        private void addDriverMountedButton_Click(object sender, EventArgs e)
-        {
-            if (driverMountPathTextBox.Text == "PathToDriver" || driverMountPathTextBox.Text == "" || driverMountPathTextBox.Text == null)
-            {
-                MessageBox.Show("Please Enter PathToDriver");
-            }
-            else
-            {
-                DismApi.Initialize(DismLogLevel.LogErrors);
-                string driverPath = driverMountPathTextBox.Text;
-                Task.Factory.StartNew(() =>
-                {
-                    Task.Run(() =>
-                    {
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke((MethodInvoker)(() =>
-                            {
-                                loadingPanel.Visible = true;
-                                mainPanel.Enabled = false;
-                                mainPanel.Visible = false;
-                            }));
-                        }
-                        else
-                        {
-                            loadingPanel.Visible = true;
-                            mainPanel.Enabled = false;
-                            mainPanel.Visible = false;
-                        }
-                    });
-                    try
-                    {
-                        using (DismSession session = DismApi.OpenOfflineSession(MountPath))
-                        {
-                            DismApi.AddDriver(session, driverPath, true);
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                    finally
-                    {
-
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke((MethodInvoker)(() =>
-                            {
-                                loadingPanel.Visible = false;
-                                mainPanel.Enabled = true;
-                                mainPanel.Visible = true;
-                            }));
-
-                        }
-                        else
-                        {
-                            loadingPanel.Visible = false;
-                            mainPanel.Enabled = true;
-                            mainPanel.Visible = true;
-                        }
-                        DismApi.Shutdown();
-                    }
-                });
-            }
-        }
-
-        private void getDriverMountedbutton_Click(object sender, EventArgs e)
-        {
-            DismApi.Initialize(DismLogLevel.LogErrors);
-            Task.Factory.StartNew(() =>
-            {
-                Task.Run(() =>
-                {
-                    if (this.InvokeRequired)
-                    {
-                        this.Invoke((MethodInvoker)(() =>
-                        {
-                            loadingPanel.Visible = true;
-                            mainPanel.Enabled = false;
-                            mainPanel.Visible = false;
-                        }));
-                    }
-                    else
-                    {
-                        loadingPanel.Visible = true;
-                        mainPanel.Enabled = false;
-                        mainPanel.Visible = false;
-                    }
-                });
-                try
-                {
-                    using (DismSession session = DismApi.OpenOfflineSession(MountPath))
-                    {
-                        var drivers = DismApi.GetDrivers(session, true);
-                        
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke((MethodInvoker)(() =>
-                            {
-                                dismOutputListbox.Items.Add("Driver Information");
-                                foreach (var driver in drivers)
-                                {
-                                    dismOutputListbox.Items.Add("Driver: " + driver.ProviderName + " Version: " + driver.Version);
-                                }
-
-                            }));
-                        }
-                        
-                        
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                finally
-                {
-
-                    if (this.InvokeRequired)
-                    {
-                        this.Invoke((MethodInvoker)(() =>
-                        {
-                            loadingPanel.Visible = false;
-                            mainPanel.Enabled = true;
-                            mainPanel.Visible = true;
-                        }));
-
-                    }
-                    else
-                    {
-                        loadingPanel.Visible = false;
-                        mainPanel.Enabled = true;
-                        mainPanel.Visible = true;
-                    }
-                    DismApi.Shutdown();
-                }
-
-
-
-            });
-        }
-
+       
         private void driverMountPathTextBox_TextChanged(object sender, EventArgs e)
         {
 
