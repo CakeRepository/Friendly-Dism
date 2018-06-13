@@ -33,6 +33,25 @@
             this.loadingProgressBar = new System.Windows.Forms.ProgressBar();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.clearDismOutput = new System.Windows.Forms.Button();
+            this.mountWimTab = new System.Windows.Forms.TabControl();
+            this.mountWimPage = new System.Windows.Forms.TabPage();
+            this.getDriverMountedbutton = new System.Windows.Forms.Button();
+            this.driverMountPathSeachButton = new System.Windows.Forms.Button();
+            this.driverMountPathTextBox = new System.Windows.Forms.TextBox();
+            this.indexTextBox = new System.Windows.Forms.TextBox();
+            this.exportPathTextBox = new System.Windows.Forms.TextBox();
+            this.wimFileTextBox = new System.Windows.Forms.TextBox();
+            this.addDriverMountedButton = new System.Windows.Forms.Button();
+            this.saveMountedRadioBurron = new System.Windows.Forms.RadioButton();
+            this.discardMountedRadioBurron = new System.Windows.Forms.RadioButton();
+            this.dismountWIMMountedButton = new System.Windows.Forms.Button();
+            this.indexLabel = new System.Windows.Forms.Label();
+            this.exportPathSearchButton = new System.Windows.Forms.Button();
+            this.wimFileSearchButton = new System.Windows.Forms.Button();
+            this.axportPathLabeel = new System.Windows.Forms.Label();
+            this.wimFileLabel = new System.Windows.Forms.Label();
+            this.mountWimButtom = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dismOutputListbox = new System.Windows.Forms.ListBox();
             this.cleanupOnlineImageButton = new System.Windows.Forms.Button();
             this.cleanupWIMButton = new System.Windows.Forms.Button();
@@ -41,29 +60,10 @@
             this.dismountWIMButton = new System.Windows.Forms.Button();
             this.getMountedImagesButton = new System.Windows.Forms.Button();
             this.getWimButtom = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.mountWimPage = new System.Windows.Forms.TabPage();
-            this.mountWimButtom = new System.Windows.Forms.Button();
-            this.wimFileLabel = new System.Windows.Forms.Label();
-            this.axportPathLabeel = new System.Windows.Forms.Label();
-            this.wimFileTextBox = new System.Windows.Forms.TextBox();
-            this.exportPathTextBox = new System.Windows.Forms.TextBox();
-            this.wimFileSearchButton = new System.Windows.Forms.Button();
-            this.exportPathSearchButton = new System.Windows.Forms.Button();
-            this.indexLabel = new System.Windows.Forms.Label();
-            this.indexTextBox = new System.Windows.Forms.TextBox();
-            this.dismountWIMMountedButton = new System.Windows.Forms.Button();
-            this.discardMountedRadioBurron = new System.Windows.Forms.RadioButton();
-            this.saveMountedRadioBurron = new System.Windows.Forms.RadioButton();
-            this.addDriverMountedButton = new System.Windows.Forms.Button();
-            this.driverMountPathTextBox = new System.Windows.Forms.TextBox();
-            this.driverMountPathSeachButton = new System.Windows.Forms.Button();
-            this.getDriverMountedbutton = new System.Windows.Forms.Button();
-            this.mountWimTab = new System.Windows.Forms.TabControl();
             this.loadingPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            this.mountWimPage.SuspendLayout();
             this.mountWimTab.SuspendLayout();
+            this.mountWimPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // loadingPanel
@@ -121,6 +121,208 @@
             this.clearDismOutput.Text = "Clear Output";
             this.clearDismOutput.UseVisualStyleBackColor = true;
             this.clearDismOutput.Click += new System.EventHandler(this.clearDismOutput_Click);
+            // 
+            // mountWimTab
+            // 
+            this.mountWimTab.Controls.Add(this.mountWimPage);
+            this.mountWimTab.Controls.Add(this.tabPage2);
+            this.mountWimTab.Location = new System.Drawing.Point(0, 417);
+            this.mountWimTab.Name = "mountWimTab";
+            this.mountWimTab.SelectedIndex = 0;
+            this.mountWimTab.Size = new System.Drawing.Size(636, 216);
+            this.mountWimTab.TabIndex = 3;
+            // 
+            // mountWimPage
+            // 
+            this.mountWimPage.Controls.Add(this.getDriverMountedbutton);
+            this.mountWimPage.Controls.Add(this.driverMountPathSeachButton);
+            this.mountWimPage.Controls.Add(this.driverMountPathTextBox);
+            this.mountWimPage.Controls.Add(this.indexTextBox);
+            this.mountWimPage.Controls.Add(this.exportPathTextBox);
+            this.mountWimPage.Controls.Add(this.wimFileTextBox);
+            this.mountWimPage.Controls.Add(this.addDriverMountedButton);
+            this.mountWimPage.Controls.Add(this.saveMountedRadioBurron);
+            this.mountWimPage.Controls.Add(this.discardMountedRadioBurron);
+            this.mountWimPage.Controls.Add(this.dismountWIMMountedButton);
+            this.mountWimPage.Controls.Add(this.indexLabel);
+            this.mountWimPage.Controls.Add(this.exportPathSearchButton);
+            this.mountWimPage.Controls.Add(this.wimFileSearchButton);
+            this.mountWimPage.Controls.Add(this.axportPathLabeel);
+            this.mountWimPage.Controls.Add(this.wimFileLabel);
+            this.mountWimPage.Controls.Add(this.mountWimButtom);
+            this.mountWimPage.Location = new System.Drawing.Point(4, 22);
+            this.mountWimPage.Name = "mountWimPage";
+            this.mountWimPage.Padding = new System.Windows.Forms.Padding(3);
+            this.mountWimPage.Size = new System.Drawing.Size(628, 190);
+            this.mountWimPage.TabIndex = 0;
+            this.mountWimPage.Text = "Mount-WIM";
+            this.mountWimPage.UseVisualStyleBackColor = true;
+            // 
+            // getDriverMountedbutton
+            // 
+            this.getDriverMountedbutton.Enabled = false;
+            this.getDriverMountedbutton.Location = new System.Drawing.Point(352, 63);
+            this.getDriverMountedbutton.Name = "getDriverMountedbutton";
+            this.getDriverMountedbutton.Size = new System.Drawing.Size(106, 43);
+            this.getDriverMountedbutton.TabIndex = 20;
+            this.getDriverMountedbutton.Text = "Get-Driver";
+            this.getDriverMountedbutton.UseVisualStyleBackColor = true;
+            this.getDriverMountedbutton.Click += new System.EventHandler(this.getDriverMountedbutton_Click);
+            // 
+            // driverMountPathSeachButton
+            // 
+            this.driverMountPathSeachButton.Enabled = false;
+            this.driverMountPathSeachButton.Location = new System.Drawing.Point(570, 6);
+            this.driverMountPathSeachButton.Name = "driverMountPathSeachButton";
+            this.driverMountPathSeachButton.Size = new System.Drawing.Size(29, 18);
+            this.driverMountPathSeachButton.TabIndex = 19;
+            this.driverMountPathSeachButton.Text = "***";
+            this.driverMountPathSeachButton.UseVisualStyleBackColor = true;
+            this.driverMountPathSeachButton.Click += new System.EventHandler(this.driverMountPathSeachButton_Click);
+            // 
+            // driverMountPathTextBox
+            // 
+            this.driverMountPathTextBox.Enabled = false;
+            this.driverMountPathTextBox.Location = new System.Drawing.Point(464, 6);
+            this.driverMountPathTextBox.Name = "driverMountPathTextBox";
+            this.driverMountPathTextBox.Size = new System.Drawing.Size(100, 20);
+            this.driverMountPathTextBox.TabIndex = 18;
+            this.driverMountPathTextBox.Text = "PathToDriver";
+            this.driverMountPathTextBox.TextChanged += new System.EventHandler(this.driverMountPathTextBox_TextChanged);
+            // 
+            // indexTextBox
+            // 
+            this.indexTextBox.Location = new System.Drawing.Point(75, 89);
+            this.indexTextBox.Name = "indexTextBox";
+            this.indexTextBox.Size = new System.Drawing.Size(30, 20);
+            this.indexTextBox.TabIndex = 13;
+            // 
+            // exportPathTextBox
+            // 
+            this.exportPathTextBox.Location = new System.Drawing.Point(75, 63);
+            this.exportPathTextBox.Name = "exportPathTextBox";
+            this.exportPathTextBox.Size = new System.Drawing.Size(100, 20);
+            this.exportPathTextBox.TabIndex = 7;
+            // 
+            // wimFileTextBox
+            // 
+            this.wimFileTextBox.Location = new System.Drawing.Point(75, 14);
+            this.wimFileTextBox.Name = "wimFileTextBox";
+            this.wimFileTextBox.Size = new System.Drawing.Size(100, 20);
+            this.wimFileTextBox.TabIndex = 6;
+            // 
+            // addDriverMountedButton
+            // 
+            this.addDriverMountedButton.Enabled = false;
+            this.addDriverMountedButton.Location = new System.Drawing.Point(352, 6);
+            this.addDriverMountedButton.Name = "addDriverMountedButton";
+            this.addDriverMountedButton.Size = new System.Drawing.Size(106, 43);
+            this.addDriverMountedButton.TabIndex = 17;
+            this.addDriverMountedButton.Text = "Add-Driver";
+            this.addDriverMountedButton.UseVisualStyleBackColor = true;
+            this.addDriverMountedButton.Click += new System.EventHandler(this.addDriverMountedButton_Click);
+            // 
+            // saveMountedRadioBurron
+            // 
+            this.saveMountedRadioBurron.AutoSize = true;
+            this.saveMountedRadioBurron.Enabled = false;
+            this.saveMountedRadioBurron.Location = new System.Drawing.Point(295, 164);
+            this.saveMountedRadioBurron.Name = "saveMountedRadioBurron";
+            this.saveMountedRadioBurron.Size = new System.Drawing.Size(50, 17);
+            this.saveMountedRadioBurron.TabIndex = 16;
+            this.saveMountedRadioBurron.Text = "Save";
+            this.saveMountedRadioBurron.UseVisualStyleBackColor = true;
+            // 
+            // discardMountedRadioBurron
+            // 
+            this.discardMountedRadioBurron.AutoSize = true;
+            this.discardMountedRadioBurron.Checked = true;
+            this.discardMountedRadioBurron.Enabled = false;
+            this.discardMountedRadioBurron.Location = new System.Drawing.Point(201, 164);
+            this.discardMountedRadioBurron.Name = "discardMountedRadioBurron";
+            this.discardMountedRadioBurron.Size = new System.Drawing.Size(61, 17);
+            this.discardMountedRadioBurron.TabIndex = 15;
+            this.discardMountedRadioBurron.TabStop = true;
+            this.discardMountedRadioBurron.Text = "Discard";
+            this.discardMountedRadioBurron.UseVisualStyleBackColor = true;
+            // 
+            // dismountWIMMountedButton
+            // 
+            this.dismountWIMMountedButton.Enabled = false;
+            this.dismountWIMMountedButton.Location = new System.Drawing.Point(201, 115);
+            this.dismountWIMMountedButton.Name = "dismountWIMMountedButton";
+            this.dismountWIMMountedButton.Size = new System.Drawing.Size(144, 43);
+            this.dismountWIMMountedButton.TabIndex = 14;
+            this.dismountWIMMountedButton.Text = "Dismount-WIM";
+            this.dismountWIMMountedButton.UseVisualStyleBackColor = true;
+            this.dismountWIMMountedButton.Click += new System.EventHandler(this.dismountWIMMountedButton_Click);
+            // 
+            // indexLabel
+            // 
+            this.indexLabel.AutoSize = true;
+            this.indexLabel.Location = new System.Drawing.Point(32, 96);
+            this.indexLabel.Name = "indexLabel";
+            this.indexLabel.Size = new System.Drawing.Size(33, 13);
+            this.indexLabel.TabIndex = 12;
+            this.indexLabel.Text = "Index";
+            // 
+            // exportPathSearchButton
+            // 
+            this.exportPathSearchButton.Location = new System.Drawing.Point(181, 63);
+            this.exportPathSearchButton.Name = "exportPathSearchButton";
+            this.exportPathSearchButton.Size = new System.Drawing.Size(29, 18);
+            this.exportPathSearchButton.TabIndex = 9;
+            this.exportPathSearchButton.Text = "***";
+            this.exportPathSearchButton.UseVisualStyleBackColor = true;
+            this.exportPathSearchButton.Click += new System.EventHandler(this.exportPathSearchButton_Click);
+            // 
+            // wimFileSearchButton
+            // 
+            this.wimFileSearchButton.Location = new System.Drawing.Point(181, 14);
+            this.wimFileSearchButton.Name = "wimFileSearchButton";
+            this.wimFileSearchButton.Size = new System.Drawing.Size(29, 18);
+            this.wimFileSearchButton.TabIndex = 8;
+            this.wimFileSearchButton.Text = "***";
+            this.wimFileSearchButton.UseVisualStyleBackColor = true;
+            this.wimFileSearchButton.Click += new System.EventHandler(this.wimFileSearchButton_Click);
+            // 
+            // axportPathLabeel
+            // 
+            this.axportPathLabeel.AutoSize = true;
+            this.axportPathLabeel.Location = new System.Drawing.Point(3, 66);
+            this.axportPathLabeel.Name = "axportPathLabeel";
+            this.axportPathLabeel.Size = new System.Drawing.Size(62, 13);
+            this.axportPathLabeel.TabIndex = 5;
+            this.axportPathLabeel.Text = "Mount Path";
+            // 
+            // wimFileLabel
+            // 
+            this.wimFileLabel.AutoSize = true;
+            this.wimFileLabel.Location = new System.Drawing.Point(16, 17);
+            this.wimFileLabel.Name = "wimFileLabel";
+            this.wimFileLabel.Size = new System.Drawing.Size(49, 13);
+            this.wimFileLabel.TabIndex = 4;
+            this.wimFileLabel.Text = "WIM File";
+            // 
+            // mountWimButtom
+            // 
+            this.mountWimButtom.Location = new System.Drawing.Point(75, 115);
+            this.mountWimButtom.Name = "mountWimButtom";
+            this.mountWimButtom.Size = new System.Drawing.Size(100, 43);
+            this.mountWimButtom.TabIndex = 3;
+            this.mountWimButtom.Text = "Mount WIM";
+            this.mountWimButtom.UseVisualStyleBackColor = true;
+            this.mountWimButtom.Click += new System.EventHandler(this.mountWimButtom_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(628, 190);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dismOutputListbox
             // 
@@ -202,207 +404,6 @@
             this.getWimButtom.UseVisualStyleBackColor = true;
             this.getWimButtom.Click += new System.EventHandler(this.getWimButtom_Click);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(628, 190);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // mountWimPage
-            // 
-            this.mountWimPage.Controls.Add(this.getDriverMountedbutton);
-            this.mountWimPage.Controls.Add(this.driverMountPathSeachButton);
-            this.mountWimPage.Controls.Add(this.driverMountPathTextBox);
-            this.mountWimPage.Controls.Add(this.indexTextBox);
-            this.mountWimPage.Controls.Add(this.exportPathTextBox);
-            this.mountWimPage.Controls.Add(this.wimFileTextBox);
-            this.mountWimPage.Controls.Add(this.addDriverMountedButton);
-            this.mountWimPage.Controls.Add(this.saveMountedRadioBurron);
-            this.mountWimPage.Controls.Add(this.discardMountedRadioBurron);
-            this.mountWimPage.Controls.Add(this.dismountWIMMountedButton);
-            this.mountWimPage.Controls.Add(this.indexLabel);
-            this.mountWimPage.Controls.Add(this.exportPathSearchButton);
-            this.mountWimPage.Controls.Add(this.wimFileSearchButton);
-            this.mountWimPage.Controls.Add(this.axportPathLabeel);
-            this.mountWimPage.Controls.Add(this.wimFileLabel);
-            this.mountWimPage.Controls.Add(this.mountWimButtom);
-            this.mountWimPage.Location = new System.Drawing.Point(4, 22);
-            this.mountWimPage.Name = "mountWimPage";
-            this.mountWimPage.Padding = new System.Windows.Forms.Padding(3);
-            this.mountWimPage.Size = new System.Drawing.Size(628, 190);
-            this.mountWimPage.TabIndex = 0;
-            this.mountWimPage.Text = "Mount-WIM";
-            this.mountWimPage.UseVisualStyleBackColor = true;
-            // 
-            // mountWimButtom
-            // 
-            this.mountWimButtom.Location = new System.Drawing.Point(75, 115);
-            this.mountWimButtom.Name = "mountWimButtom";
-            this.mountWimButtom.Size = new System.Drawing.Size(100, 43);
-            this.mountWimButtom.TabIndex = 3;
-            this.mountWimButtom.Text = "Mount WIM";
-            this.mountWimButtom.UseVisualStyleBackColor = true;
-            this.mountWimButtom.Click += new System.EventHandler(this.mountWimButtom_Click);
-            // 
-            // wimFileLabel
-            // 
-            this.wimFileLabel.AutoSize = true;
-            this.wimFileLabel.Location = new System.Drawing.Point(16, 17);
-            this.wimFileLabel.Name = "wimFileLabel";
-            this.wimFileLabel.Size = new System.Drawing.Size(49, 13);
-            this.wimFileLabel.TabIndex = 4;
-            this.wimFileLabel.Text = "WIM File";
-            // 
-            // axportPathLabeel
-            // 
-            this.axportPathLabeel.AutoSize = true;
-            this.axportPathLabeel.Location = new System.Drawing.Point(3, 66);
-            this.axportPathLabeel.Name = "axportPathLabeel";
-            this.axportPathLabeel.Size = new System.Drawing.Size(62, 13);
-            this.axportPathLabeel.TabIndex = 5;
-            this.axportPathLabeel.Text = "Mount Path";
-            // 
-            // wimFileTextBox
-            // 
-            this.wimFileTextBox.Location = new System.Drawing.Point(75, 14);
-            this.wimFileTextBox.Name = "wimFileTextBox";
-            this.wimFileTextBox.Size = new System.Drawing.Size(100, 20);
-            this.wimFileTextBox.TabIndex = 6;
-            // 
-            // exportPathTextBox
-            // 
-            this.exportPathTextBox.Location = new System.Drawing.Point(75, 63);
-            this.exportPathTextBox.Name = "exportPathTextBox";
-            this.exportPathTextBox.Size = new System.Drawing.Size(100, 20);
-            this.exportPathTextBox.TabIndex = 7;
-            // 
-            // wimFileSearchButton
-            // 
-            this.wimFileSearchButton.Location = new System.Drawing.Point(181, 14);
-            this.wimFileSearchButton.Name = "wimFileSearchButton";
-            this.wimFileSearchButton.Size = new System.Drawing.Size(29, 18);
-            this.wimFileSearchButton.TabIndex = 8;
-            this.wimFileSearchButton.Text = "***";
-            this.wimFileSearchButton.UseVisualStyleBackColor = true;
-            this.wimFileSearchButton.Click += new System.EventHandler(this.wimFileSearchButton_Click);
-            // 
-            // exportPathSearchButton
-            // 
-            this.exportPathSearchButton.Location = new System.Drawing.Point(181, 63);
-            this.exportPathSearchButton.Name = "exportPathSearchButton";
-            this.exportPathSearchButton.Size = new System.Drawing.Size(29, 18);
-            this.exportPathSearchButton.TabIndex = 9;
-            this.exportPathSearchButton.Text = "***";
-            this.exportPathSearchButton.UseVisualStyleBackColor = true;
-            this.exportPathSearchButton.Click += new System.EventHandler(this.exportPathSearchButton_Click);
-            // 
-            // indexLabel
-            // 
-            this.indexLabel.AutoSize = true;
-            this.indexLabel.Location = new System.Drawing.Point(32, 96);
-            this.indexLabel.Name = "indexLabel";
-            this.indexLabel.Size = new System.Drawing.Size(33, 13);
-            this.indexLabel.TabIndex = 12;
-            this.indexLabel.Text = "Index";
-            // 
-            // indexTextBox
-            // 
-            this.indexTextBox.Location = new System.Drawing.Point(75, 89);
-            this.indexTextBox.Name = "indexTextBox";
-            this.indexTextBox.Size = new System.Drawing.Size(30, 20);
-            this.indexTextBox.TabIndex = 13;
-            // 
-            // dismountWIMMountedButton
-            // 
-            this.dismountWIMMountedButton.Enabled = false;
-            this.dismountWIMMountedButton.Location = new System.Drawing.Point(201, 115);
-            this.dismountWIMMountedButton.Name = "dismountWIMMountedButton";
-            this.dismountWIMMountedButton.Size = new System.Drawing.Size(144, 43);
-            this.dismountWIMMountedButton.TabIndex = 14;
-            this.dismountWIMMountedButton.Text = "Dismount-WIM";
-            this.dismountWIMMountedButton.UseVisualStyleBackColor = true;
-            this.dismountWIMMountedButton.Click += new System.EventHandler(this.dismountWIMMountedButton_Click);
-            // 
-            // discardMountedRadioBurron
-            // 
-            this.discardMountedRadioBurron.AutoSize = true;
-            this.discardMountedRadioBurron.Checked = true;
-            this.discardMountedRadioBurron.Enabled = false;
-            this.discardMountedRadioBurron.Location = new System.Drawing.Point(201, 164);
-            this.discardMountedRadioBurron.Name = "discardMountedRadioBurron";
-            this.discardMountedRadioBurron.Size = new System.Drawing.Size(61, 17);
-            this.discardMountedRadioBurron.TabIndex = 15;
-            this.discardMountedRadioBurron.TabStop = true;
-            this.discardMountedRadioBurron.Text = "Discard";
-            this.discardMountedRadioBurron.UseVisualStyleBackColor = true;
-            // 
-            // saveMountedRadioBurron
-            // 
-            this.saveMountedRadioBurron.AutoSize = true;
-            this.saveMountedRadioBurron.Enabled = false;
-            this.saveMountedRadioBurron.Location = new System.Drawing.Point(295, 164);
-            this.saveMountedRadioBurron.Name = "saveMountedRadioBurron";
-            this.saveMountedRadioBurron.Size = new System.Drawing.Size(50, 17);
-            this.saveMountedRadioBurron.TabIndex = 16;
-            this.saveMountedRadioBurron.Text = "Save";
-            this.saveMountedRadioBurron.UseVisualStyleBackColor = true;
-            // 
-            // addDriverMountedButton
-            // 
-            this.addDriverMountedButton.Enabled = false;
-            this.addDriverMountedButton.Location = new System.Drawing.Point(352, 6);
-            this.addDriverMountedButton.Name = "addDriverMountedButton";
-            this.addDriverMountedButton.Size = new System.Drawing.Size(106, 43);
-            this.addDriverMountedButton.TabIndex = 17;
-            this.addDriverMountedButton.Text = "Add-Driver";
-            this.addDriverMountedButton.UseVisualStyleBackColor = true;
-            this.addDriverMountedButton.Click += new System.EventHandler(this.addDriverMountedButton_Click);
-            // 
-            // driverMountPathTextBox
-            // 
-            this.driverMountPathTextBox.Enabled = false;
-            this.driverMountPathTextBox.Location = new System.Drawing.Point(464, 6);
-            this.driverMountPathTextBox.Name = "driverMountPathTextBox";
-            this.driverMountPathTextBox.Size = new System.Drawing.Size(100, 20);
-            this.driverMountPathTextBox.TabIndex = 18;
-            this.driverMountPathTextBox.Text = "PathToDriver";
-            // 
-            // driverMountPathSeachButton
-            // 
-            this.driverMountPathSeachButton.Enabled = false;
-            this.driverMountPathSeachButton.Location = new System.Drawing.Point(570, 6);
-            this.driverMountPathSeachButton.Name = "driverMountPathSeachButton";
-            this.driverMountPathSeachButton.Size = new System.Drawing.Size(29, 18);
-            this.driverMountPathSeachButton.TabIndex = 19;
-            this.driverMountPathSeachButton.Text = "***";
-            this.driverMountPathSeachButton.UseVisualStyleBackColor = true;
-            this.driverMountPathSeachButton.Click += new System.EventHandler(this.driverMountPathSeachButton_Click);
-            // 
-            // getDriverMountedbutton
-            // 
-            this.getDriverMountedbutton.Enabled = false;
-            this.getDriverMountedbutton.Location = new System.Drawing.Point(352, 63);
-            this.getDriverMountedbutton.Name = "getDriverMountedbutton";
-            this.getDriverMountedbutton.Size = new System.Drawing.Size(106, 43);
-            this.getDriverMountedbutton.TabIndex = 20;
-            this.getDriverMountedbutton.Text = "Get-Driver";
-            this.getDriverMountedbutton.UseVisualStyleBackColor = true;
-            this.getDriverMountedbutton.Click += new System.EventHandler(this.getDriverMountedbutton_Click);
-            // 
-            // mountWimTab
-            // 
-            this.mountWimTab.Controls.Add(this.mountWimPage);
-            this.mountWimTab.Controls.Add(this.tabPage2);
-            this.mountWimTab.Location = new System.Drawing.Point(0, 417);
-            this.mountWimTab.Name = "mountWimTab";
-            this.mountWimTab.SelectedIndex = 0;
-            this.mountWimTab.Size = new System.Drawing.Size(636, 216);
-            this.mountWimTab.TabIndex = 3;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,9 +419,9 @@
             this.loadingPanel.PerformLayout();
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            this.mountWimTab.ResumeLayout(false);
             this.mountWimPage.ResumeLayout(false);
             this.mountWimPage.PerformLayout();
-            this.mountWimTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

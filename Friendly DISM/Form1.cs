@@ -162,54 +162,62 @@ namespace Friendly_DISM
         /// <param name="e"></param>
         private void mountWimButtom_Click(object sender, EventArgs e)
         {
-            DismApi.Initialize(DismLogLevel.LogErrors);
-            Task t = Task.Factory.StartNew(() =>
+            if (!String.IsNullOrEmpty(wimFileTextBox.Text) || !String.IsNullOrEmpty(exportPathTextBox.Text))
             {
-                if (this.InvokeRequired)
-                {
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        loadingPanel.Visible = true;
-                        mainPanel.Enabled = false;
-                        mainPanel.Visible = false;
-                        uiControlMounted(true);
-                    }));
-                }
-                try
-                {
-                    DismMountImageOptions s = new DismMountImageOptions();
-                    string imagePath = wimFileTextBox.Text;
-                    string mountPath = exportPathTextBox.Text;
-                    int imageIndex = Convert.ToInt32(indexTextBox.Text);
-
-                    // Create the mount dir if it doesn't exit
-                    if (Directory.Exists(mountPath) == false)
-                    {
-                        Directory.CreateDirectory(mountPath);
-                    }
-                    // Mount the image
-                    DismApi.MountImage(imagePath, mountPath, imageIndex, false, s, dismProgress_action);
-                    MountPath = mountPath;
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex);
-                }
-                finally
+                DismApi.Initialize(DismLogLevel.LogErrors);
+                Task t = Task.Factory.StartNew(() =>
                 {
                     if (this.InvokeRequired)
                     {
                         this.Invoke((MethodInvoker)(() =>
                         {
-                            loadingPanel.Visible = false;
-                            mainPanel.Enabled = true;
-                            mainPanel.Visible = true;
+                            loadingPanel.Visible = true;
+                            mainPanel.Enabled = false;
+                            mainPanel.Visible = false;
+                            uiControlMounted(true);
                         }));
                     }
-                    // Shut down the DismApi
-                    DismApi.Shutdown();
-                }
-            });
+                    try
+                    {
+                        DismMountImageOptions s = new DismMountImageOptions();
+                        string imagePath = wimFileTextBox.Text;
+                        string mountPath = exportPathTextBox.Text;
+                        int imageIndex = Convert.ToInt32(indexTextBox.Text);
+
+                        // Create the mount dir if it doesn't exit
+                        if (Directory.Exists(mountPath) == false)
+                        {
+                            Directory.CreateDirectory(mountPath);
+                        }
+                        // Mount the image
+                        DismApi.MountImage(imagePath, mountPath, imageIndex, false, s, dismProgress_action);
+                        MountPath = mountPath;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex);
+                    }
+                    finally
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                loadingPanel.Visible = false;
+                                mainPanel.Enabled = true;
+                                mainPanel.Visible = true;
+                            }));
+                        }
+                        // Shut down the DismApi
+                        DismApi.Shutdown();
+                    }
+                });
+            }
+            else
+            {
+                MessageBox.Show("Please ");
+            }
+            
         }
 
         /// <summary>
@@ -388,10 +396,12 @@ namespace Friendly_DISM
                 if (dialog.ShowDialog() == DialogResult.OK)  //check for OK...they might press cancel, so don't do anything if they did.
                 {
                     mountPath = dialog.SelectedPath;
-                    Task.Factory.StartNew(() =>
+                    DismApi.Initialize(DismLogLevel.LogErrors);
+                    Task t = Task.Factory.StartNew(() =>
                     {
-                        Task.Run(() =>
+                        try
                         {
+                            bool save = false;
                             if (this.InvokeRequired)
                             {
                                 this.Invoke((MethodInvoker)(() =>
@@ -399,30 +409,21 @@ namespace Friendly_DISM
                                     loadingPanel.Visible = true;
                                     mainPanel.Enabled = false;
                                     mainPanel.Visible = false;
-                                }));
+                                    uiControlMounted(false);
+                                    if (saveMountedRadioBurron.Checked)
+                                    {
+                                        save = true;
+                                    }
+                                }
+                                ));
                             }
-                            else
-                            {
-                                loadingPanel.Visible = true;
-                                mainPanel.Enabled = false;
-                                mainPanel.Visible = false;
-                            }
-                        });
 
-                        
-                        try
-                        {
-
-                            bool save = false;
-                            if (saveRadioButton.Checked)
-                            {
-                                save = true;
-                            }
                             DismApi.UnmountImage(mountPath, save, dismProgress_action);
+
                         }
-                        catch(DismException ex)
+                        catch
                         {
-                            MessageBox.Show(ex.ToString());
+                            MessageBox.Show("Attempt to remount or cleanup WIM");
                         }
                         finally
                         {
@@ -434,18 +435,10 @@ namespace Friendly_DISM
                                     mainPanel.Enabled = true;
                                     mainPanel.Visible = true;
                                 }));
-
-                            }
-                            else
-                            {
-                                loadingPanel.Visible = false;
-                                mainPanel.Enabled = true;
-                                mainPanel.Visible = true;
                             }
                             // Shut down the DismApi
                             DismApi.Shutdown();
                         }
-
                     });
                 }
             }
@@ -580,9 +573,7 @@ namespace Friendly_DISM
         }
 
         #endregion
-
-
-
+        
         private void dismProgress_action(DismProgress progress)
         {
             Task.Run(() =>
@@ -609,65 +600,69 @@ namespace Friendly_DISM
 
         private void addDriverMountedButton_Click(object sender, EventArgs e)
         {
-            DismApi.Initialize(DismLogLevel.LogErrors);
-            string driverPath = driverMountPathTextBox.Text;
-            Task.Factory.StartNew(() =>
+            if (driverMountPathTextBox.Text == "PathToDriver" || driverMountPathTextBox.Text == "" || driverMountPathTextBox.Text == null)
             {
-                Task.Run(() =>
+                MessageBox.Show("Please Enter PathToDriver");
+            }
+            else
+            {
+                DismApi.Initialize(DismLogLevel.LogErrors);
+                string driverPath = driverMountPathTextBox.Text;
+                Task.Factory.StartNew(() =>
                 {
-                    if (this.InvokeRequired)
+                    Task.Run(() =>
                     {
-                        this.Invoke((MethodInvoker)(() =>
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                loadingPanel.Visible = true;
+                                mainPanel.Enabled = false;
+                                mainPanel.Visible = false;
+                            }));
+                        }
+                        else
                         {
                             loadingPanel.Visible = true;
                             mainPanel.Enabled = false;
                             mainPanel.Visible = false;
-                        }));
-                    }
-                    else
+                        }
+                    });
+                    try
                     {
-                        loadingPanel.Visible = true;
-                        mainPanel.Enabled = false;
-                        mainPanel.Visible = false;
-                    }
-                });
-                try
-                {
-                    using (DismSession session = DismApi.OpenOfflineSession(MountPath))
-                    {
-                        DismApi.AddDriver(session, driverPath, true);
-                    }
+                        using (DismSession session = DismApi.OpenOfflineSession(MountPath))
+                        {
+                            DismApi.AddDriver(session, driverPath, true);
+                        }
 
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                finally
-                {
-
-                    if (this.InvokeRequired)
+                    }
+                    catch (Exception ex)
                     {
-                        this.Invoke((MethodInvoker)(() =>
+                        MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                loadingPanel.Visible = false;
+                                mainPanel.Enabled = true;
+                                mainPanel.Visible = true;
+                            }));
+
+                        }
+                        else
                         {
                             loadingPanel.Visible = false;
                             mainPanel.Enabled = true;
                             mainPanel.Visible = true;
-                        }));
-
+                        }
+                        DismApi.Shutdown();
                     }
-                    else
-                    {
-                        loadingPanel.Visible = false;
-                        mainPanel.Enabled = true;
-                        mainPanel.Visible = true;
-                    }
-                    DismApi.Shutdown();
-                }
-
-
-
-            });
+                });
+            }
         }
 
         private void getDriverMountedbutton_Click(object sender, EventArgs e)
@@ -707,7 +702,6 @@ namespace Friendly_DISM
                                 foreach (var driver in drivers)
                                 {
                                     dismOutputListbox.Items.Add("Driver: " + driver.ProviderName + " Version: " + driver.Version);
-
                                 }
 
                             }));
@@ -748,5 +742,9 @@ namespace Friendly_DISM
             });
         }
 
+        private void driverMountPathTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
