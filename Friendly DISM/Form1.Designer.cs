@@ -51,7 +51,6 @@
             this.axportPathLabeel = new System.Windows.Forms.Label();
             this.wimFileLabel = new System.Windows.Forms.Label();
             this.mountWimButtom = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dismOutputListbox = new System.Windows.Forms.ListBox();
             this.cleanupOnlineImageButton = new System.Windows.Forms.Button();
             this.cleanupWIMButton = new System.Windows.Forms.Button();
@@ -74,7 +73,7 @@
             this.loadingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loadingPanel.Location = new System.Drawing.Point(0, 0);
             this.loadingPanel.Name = "loadingPanel";
-            this.loadingPanel.Size = new System.Drawing.Size(638, 633);
+            this.loadingPanel.Size = new System.Drawing.Size(638, 366);
             this.loadingPanel.TabIndex = 13;
             this.loadingPanel.Visible = false;
             // 
@@ -109,12 +108,12 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(638, 633);
+            this.mainPanel.Size = new System.Drawing.Size(638, 366);
             this.mainPanel.TabIndex = 15;
             // 
             // clearDismOutput
             // 
-            this.clearDismOutput.Location = new System.Drawing.Point(151, 368);
+            this.clearDismOutput.Location = new System.Drawing.Point(154, 170);
             this.clearDismOutput.Name = "clearDismOutput";
             this.clearDismOutput.Size = new System.Drawing.Size(144, 43);
             this.clearDismOutput.TabIndex = 19;
@@ -125,11 +124,10 @@
             // mountWimTab
             // 
             this.mountWimTab.Controls.Add(this.mountWimPage);
-            this.mountWimTab.Controls.Add(this.tabPage2);
-            this.mountWimTab.Location = new System.Drawing.Point(0, 417);
+            this.mountWimTab.Location = new System.Drawing.Point(0, 203);
             this.mountWimTab.Name = "mountWimTab";
             this.mountWimTab.SelectedIndex = 0;
-            this.mountWimTab.Size = new System.Drawing.Size(636, 216);
+            this.mountWimTab.Size = new System.Drawing.Size(638, 164);
             this.mountWimTab.TabIndex = 3;
             // 
             // mountWimPage
@@ -153,7 +151,7 @@
             this.mountWimPage.Location = new System.Drawing.Point(4, 22);
             this.mountWimPage.Name = "mountWimPage";
             this.mountWimPage.Padding = new System.Windows.Forms.Padding(3);
-            this.mountWimPage.Size = new System.Drawing.Size(628, 190);
+            this.mountWimPage.Size = new System.Drawing.Size(630, 138);
             this.mountWimPage.TabIndex = 0;
             this.mountWimPage.Text = "Mount-WIM";
             this.mountWimPage.UseVisualStyleBackColor = true;
@@ -192,14 +190,14 @@
             // 
             // indexTextBox
             // 
-            this.indexTextBox.Location = new System.Drawing.Point(75, 89);
+            this.indexTextBox.Location = new System.Drawing.Point(75, 64);
             this.indexTextBox.Name = "indexTextBox";
             this.indexTextBox.Size = new System.Drawing.Size(30, 20);
             this.indexTextBox.TabIndex = 13;
             // 
             // exportPathTextBox
             // 
-            this.exportPathTextBox.Location = new System.Drawing.Point(75, 63);
+            this.exportPathTextBox.Location = new System.Drawing.Point(75, 40);
             this.exportPathTextBox.Name = "exportPathTextBox";
             this.exportPathTextBox.Size = new System.Drawing.Size(100, 20);
             this.exportPathTextBox.TabIndex = 7;
@@ -249,7 +247,7 @@
             // dismountWIMMountedButton
             // 
             this.dismountWIMMountedButton.Enabled = false;
-            this.dismountWIMMountedButton.Location = new System.Drawing.Point(201, 115);
+            this.dismountWIMMountedButton.Location = new System.Drawing.Point(201, 90);
             this.dismountWIMMountedButton.Name = "dismountWIMMountedButton";
             this.dismountWIMMountedButton.Size = new System.Drawing.Size(144, 43);
             this.dismountWIMMountedButton.TabIndex = 14;
@@ -260,7 +258,7 @@
             // indexLabel
             // 
             this.indexLabel.AutoSize = true;
-            this.indexLabel.Location = new System.Drawing.Point(32, 96);
+            this.indexLabel.Location = new System.Drawing.Point(32, 67);
             this.indexLabel.Name = "indexLabel";
             this.indexLabel.Size = new System.Drawing.Size(33, 13);
             this.indexLabel.TabIndex = 12;
@@ -268,7 +266,7 @@
             // 
             // exportPathSearchButton
             // 
-            this.exportPathSearchButton.Location = new System.Drawing.Point(181, 63);
+            this.exportPathSearchButton.Location = new System.Drawing.Point(181, 42);
             this.exportPathSearchButton.Name = "exportPathSearchButton";
             this.exportPathSearchButton.Size = new System.Drawing.Size(29, 18);
             this.exportPathSearchButton.TabIndex = 9;
@@ -289,7 +287,7 @@
             // axportPathLabeel
             // 
             this.axportPathLabeel.AutoSize = true;
-            this.axportPathLabeel.Location = new System.Drawing.Point(3, 66);
+            this.axportPathLabeel.Location = new System.Drawing.Point(3, 43);
             this.axportPathLabeel.Name = "axportPathLabeel";
             this.axportPathLabeel.Size = new System.Drawing.Size(62, 13);
             this.axportPathLabeel.TabIndex = 5;
@@ -306,7 +304,7 @@
             // 
             // mountWimButtom
             // 
-            this.mountWimButtom.Location = new System.Drawing.Point(75, 115);
+            this.mountWimButtom.Location = new System.Drawing.Point(75, 90);
             this.mountWimButtom.Name = "mountWimButtom";
             this.mountWimButtom.Size = new System.Drawing.Size(100, 43);
             this.mountWimButtom.TabIndex = 3;
@@ -314,22 +312,12 @@
             this.mountWimButtom.UseVisualStyleBackColor = true;
             this.mountWimButtom.Click += new System.EventHandler(this.mountWimButtom_Click);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(628, 190);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // dismOutputListbox
             // 
             this.dismOutputListbox.FormattingEnabled = true;
-            this.dismOutputListbox.Location = new System.Drawing.Point(304, 12);
+            this.dismOutputListbox.Location = new System.Drawing.Point(299, 1);
             this.dismOutputListbox.Name = "dismOutputListbox";
-            this.dismOutputListbox.Size = new System.Drawing.Size(322, 407);
+            this.dismOutputListbox.Size = new System.Drawing.Size(339, 199);
             this.dismOutputListbox.TabIndex = 4;
             // 
             // cleanupOnlineImageButton
@@ -408,7 +396,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 633);
+            this.ClientSize = new System.Drawing.Size(638, 366);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.loadingPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -458,7 +446,6 @@
         private System.Windows.Forms.Label axportPathLabeel;
         private System.Windows.Forms.Label wimFileLabel;
         private System.Windows.Forms.Button mountWimButtom;
-        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
